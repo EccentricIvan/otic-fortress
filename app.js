@@ -1094,6 +1094,8 @@ function initApp() {
     renderProductTable();
     renderThreats();
     attachEventHandlers();
+    // Ensure command center is shown once data loads
+    showScreen('command');
   });
 }
 
@@ -1102,6 +1104,3 @@ if (document.readyState === 'loading') {
 } else {
   initApp();
 }
-
-// ensure default screen visible
-if (document.readyState !== 'loading') showScreen('command');
