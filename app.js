@@ -1,117 +1,125 @@
-const liveFeed = [
-  {
-    title: 'Prompt injection blocked — CIP Credit Analyst',
-    subtitle: 'Sentinel Agent · Severity: Medium · Auto-resolved',
-    time: '2m ago',
-  },
-  {
-    title: 'Unusual data access pattern — IIP Underwriting',
-    subtitle: 'Sentinel Agent · Under review by security team',
-    time: '7m ago',
-  },
-  {
-    title: 'Jailbreak attempt detected — Pulse Decision Agent',
-    subtitle: 'Threat Intel Agent · Escalated to CISO',
-    time: '14m ago',
-  },
-  {
-    title: 'Policy violation reviewed — CIP Collections',
-    subtitle: 'Governance Agent · Decision approved',
-    time: '31m ago',
-  },
-  {
-    title: 'Key rotation completed — All Products',
-    subtitle: 'Encryption Agent · 15.2M conversations re-keyed',
-    time: '1h ago',
-  },
-];
+// Default fallback data (used if data.json fails to load)
+const defaultData = {
+  liveFeed: [
+    { title: 'Prompt injection blocked — CIP Credit Analyst', subtitle: 'Sentinel Agent · Severity: Medium · Auto-resolved', time: '2m ago' },
+    { title: 'Unusual data access pattern — IIP Underwriting', subtitle: 'Sentinel Agent · Under review by security team', time: '7m ago' },
+    { title: 'Jailbreak attempt detected — Pulse Decision Agent', subtitle: 'Threat Intel Agent · Escalated to CISO', time: '14m ago' },
+    { title: 'Policy violation reviewed — CIP Collections', subtitle: 'Governance Agent · Decision approved', time: '31m ago' },
+    { title: 'Key rotation completed — All Products', subtitle: 'Encryption Agent · 15.2M conversations re-keyed', time: '1h ago' },
+  ],
+  products: [
+    { name: 'CIP', trust: '97%', agents: 186, threats: 2, compliance: '99%', status: 'Healthy' },
+    { name: 'IIP', trust: '95%', agents: 143, threats: 1, compliance: '98%', status: 'Healthy' },
+    { name: 'Otic Pulse', trust: '93%', agents: 97, threats: 4, compliance: '95%', status: 'Review' },
+    { name: 'Future Products', trust: '96%', agents: 6, threats: 0, compliance: '100%', status: 'Healthy' },
+  ],
+  threats: [
+    { id: 'TH-2026-001', title: 'Prompt injection blocked — CIP Credit Analyst', product: 'CIP', severity: 'medium', source: 'Sentinel Agent', time: '2m ago' },
+    { id: 'TH-2026-002', title: 'Unusual data access pattern — IIP Underwriting', product: 'IIP', severity: 'medium', source: 'Sentinel Agent', time: '7m ago' },
+    { id: 'TH-2026-003', title: 'Jailbreak attempt detected — Pulse Decision Agent', product: 'Otic Pulse', severity: 'high', source: 'Threat Intel Agent', time: '14m ago' },
+    { id: 'TH-2026-004', title: 'Policy violation reviewed — CIP Collections', product: 'CIP', severity: 'low', source: 'Governance Agent', time: '31m ago' },
+    { id: 'TH-2026-005', title: 'Key rotation completed — All Products', product: 'All', severity: 'low', source: 'Encryption Agent', time: '1h ago' },
+  ],
+  agents: [
+    { id: 'AG-1001', name: 'Sentinel Agent', product: 'CIP', status: 'healthy', lastSeen: '12s ago' },
+    { id: 'AG-1002', name: 'Threat Intel Agent', product: 'Otic Pulse', status: 'warning', lastSeen: '2m ago' },
+    { id: 'AG-1003', name: 'Encryption Agent', product: 'All', status: 'healthy', lastSeen: '7m ago' },
+    { id: 'AG-1004', name: 'Governance Agent', product: 'CIP', status: 'review', lastSeen: '31m ago' },
+  ],
+  incidents: [
+    { id: 'INC-1024', title: 'Privilege Escalation Attempt', severity: 'critical', product: 'CIP', time: '4h ago', status: 'open' },
+    { id: 'INC-1025', title: 'Suspicious API Activity', severity: 'high', product: 'IIP', time: '2h ago', status: 'investigating' },
+    { id: 'INC-1026', title: 'Unauthorized Access Request', severity: 'medium', product: 'Otic Pulse', time: '1d ago', status: 'closed' },
+    { id: 'INC-1027', title: 'Data Classification Alert', severity: 'low', product: 'CIP', time: '3d ago', status: 'review' },
+  ],
+  governanceReviews: [
+    { id: 'GR-2001', decision: 'Approve data sharing', status: 'approved', reviewer: 'Alice', date: '2026-06-14' },
+    { id: 'GR-2002', decision: 'Model retrain', status: 'pending', reviewer: 'Bob', date: '2026-06-15' },
+    { id: 'GR-2003', decision: 'AI safety policy update', status: 'review', reviewer: 'Clara', date: '2026-06-12' },
+  ],
+  reviewRequests: [
+    { id: 'DR-3001', title: 'Update classification policy', owner: 'Sam', due: 'Today', status: 'pending' },
+    { id: 'DR-3002', title: 'Approve agent deployment', owner: 'Mia', due: 'Tomorrow', status: 'review' },
+    { id: 'DR-3003', title: 'Review data retention controls', owner: 'Noah', due: '2d', status: 'approved' },
+  ],
+  escalations: [
+    { id: 'ES-4101', incident: 'API privilege spike', owner: 'Security Ops', priority: 'high', status: 'open' },
+    { id: 'ES-4102', incident: 'Disallowed data request', owner: 'Compliance', priority: 'medium', status: 'pending' },
+    { id: 'ES-4103', incident: 'Policy violation', owner: 'Audit', priority: 'low', status: 'resolved' },
+  ],
+  complianceChecks: [
+    { id: 'CC-1201', name: 'Encryption certification', status: 'pass', due: 'N/A' },
+    { id: 'CC-1202', name: 'Model audit', status: 'pending', due: '2026-06-22' },
+    { id: 'CC-1203', name: 'Data access review', status: 'pass', due: 'N/A' },
+    { id: 'CC-1204', name: 'Regulatory filing', status: 'action required', due: '2026-06-30' },
+  ],
+  reportQueue: [
+    { id: 'RP-501', title: 'Quarterly compliance overview', category: 'Regulatory', status: 'ready', updated: '2h ago' },
+    { id: 'RP-502', title: 'Agent security posture', category: 'Operations', status: 'in progress', updated: '1d ago' },
+    { id: 'RP-503', title: 'Risk exposure summary', category: 'Risk', status: 'scheduled', updated: '3d ago' },
+  ],
+  libraryItems: [
+    { id: 'LB-701', title: 'AI Usage Policy', category: 'Policy', status: 'active' },
+    { id: 'LB-702', title: 'Incident response plan', category: 'Playbook', status: 'review' },
+    { id: 'LB-703', title: 'Data access standard', category: 'Procedure', status: 'active' },
+  ],
+  auditTrails: [
+    { id: 'AT-001', event: 'Agent upgrade', user: 'Alice', product: 'CIP', time: '9m ago' },
+    { id: 'AT-002', event: 'Threat flagged', user: 'Security Bot', product: 'Otic Pulse', time: '42m ago' },
+    { id: 'AT-003', event: 'Compliance check passed', user: 'Governance Agent', product: 'All', time: '2h ago' },
+  ],
+  riskInsights: [
+    { metric: 'Exposure score', value: '14/100', trend: 'down', note: 'Reduced attack surface after patch' },
+    { metric: 'Model drift', value: '2.6%', trend: 'stable', note: 'Inside acceptable bounds' },
+    { metric: 'Policy adherence', value: '95%', trend: 'up', note: 'Governance improvements effective' },
+  ],
+  trendSeries: [
+    { label: 'Threat count', value: 12, change: '-5%', trend: 'down' },
+    { label: 'Compliance rate', value: 98, change: '+1%', trend: 'up' },
+    { label: 'Agent uptime', value: 99.7, change: '+0.3%', trend: 'up' },
+  ],
+};
 
-const products = [
-  { name: 'CIP', trust: '97%', agents: 186, threats: 2, compliance: '99%', status: 'Healthy' },
-  { name: 'IIP', trust: '95%', agents: 143, threats: 1, compliance: '98%', status: 'Healthy' },
-  { name: 'Otic Pulse', trust: '93%', agents: 97, threats: 4, compliance: '95%', status: 'Review' },
-  { name: 'Future Products', trust: '96%', agents: 6, threats: 0, compliance: '100%', status: 'Healthy' },
-];
+// Data variables — loaded from data.json or use defaults
+let liveFeed = defaultData.liveFeed;
+let products = defaultData.products;
+let threats = defaultData.threats;
+let agents = defaultData.agents;
+let incidents = defaultData.incidents;
+let governanceReviews = defaultData.governanceReviews;
+let reviewRequests = defaultData.reviewRequests;
+let escalations = defaultData.escalations;
+let complianceChecks = defaultData.complianceChecks;
+let reportQueue = defaultData.reportQueue;
+let libraryItems = defaultData.libraryItems;
+let auditTrails = defaultData.auditTrails;
+let riskInsights = defaultData.riskInsights;
+let trendSeries = defaultData.trendSeries;
 
-// threat records (derived from liveFeed with extra metadata)
-const threats = [
-  { id: 'TH-2026-001', title: 'Prompt injection blocked — CIP Credit Analyst', product: 'CIP', severity: 'medium', source: 'Sentinel Agent', time: '2m ago' },
-  { id: 'TH-2026-002', title: 'Unusual data access pattern — IIP Underwriting', product: 'IIP', severity: 'medium', source: 'Sentinel Agent', time: '7m ago' },
-  { id: 'TH-2026-003', title: 'Jailbreak attempt detected — Pulse Decision Agent', product: 'Otic Pulse', severity: 'high', source: 'Threat Intel Agent', time: '14m ago' },
-  { id: 'TH-2026-004', title: 'Policy violation reviewed — CIP Collections', product: 'CIP', severity: 'low', source: 'Governance Agent', time: '31m ago' },
-  { id: 'TH-2026-005', title: 'Key rotation completed — All Products', product: 'All', severity: 'low', source: 'Encryption Agent', time: '1h ago' },
-];
-
-// agents dataset
-const agents = [
-  { id: 'AG-1001', name: 'Sentinel Agent', product: 'CIP', status: 'healthy', lastSeen: '12s ago' },
-  { id: 'AG-1002', name: 'Threat Intel Agent', product: 'Otic Pulse', status: 'warning', lastSeen: '2m ago' },
-  { id: 'AG-1003', name: 'Encryption Agent', product: 'All', status: 'healthy', lastSeen: '7m ago' },
-  { id: 'AG-1004', name: 'Governance Agent', product: 'CIP', status: 'review', lastSeen: '31m ago' },
-];
-
-// incidents dataset
-const incidents = [
-  { id: 'INC-1024', title: 'Privilege Escalation Attempt', severity: 'critical', product: 'CIP', time: '4h ago', status: 'open' },
-  { id: 'INC-1025', title: 'Suspicious API Activity', severity: 'high', product: 'IIP', time: '2h ago', status: 'investigating' },
-  { id: 'INC-1026', title: 'Unauthorized Access Request', severity: 'medium', product: 'Otic Pulse', time: '1d ago', status: 'closed' },
-  { id: 'INC-1027', title: 'Data Classification Alert', severity: 'low', product: 'CIP', time: '3d ago', status: 'review' },
-];
-
-const governanceReviews = [
-  { id: 'GR-2001', decision: 'Approve data sharing', status: 'approved', reviewer: 'Alice', date: '2026-06-14' },
-  { id: 'GR-2002', decision: 'Model retrain', status: 'pending', reviewer: 'Bob', date: '2026-06-15' },
-  { id: 'GR-2003', decision: 'AI safety policy update', status: 'review', reviewer: 'Clara', date: '2026-06-12' },
-];
-
-const reviewRequests = [
-  { id: 'DR-3001', title: 'Update classification policy', owner: 'Sam', due: 'Today', status: 'pending' },
-  { id: 'DR-3002', title: 'Approve agent deployment', owner: 'Mia', due: 'Tomorrow', status: 'review' },
-  { id: 'DR-3003', title: 'Review data retention controls', owner: 'Noah', due: '2d', status: 'approved' },
-];
-
-const escalations = [
-  { id: 'ES-4101', incident: 'API privilege spike', owner: 'Security Ops', priority: 'high', status: 'open' },
-  { id: 'ES-4102', incident: 'Disallowed data request', owner: 'Compliance', priority: 'medium', status: 'pending' },
-  { id: 'ES-4103', incident: 'Policy violation', owner: 'Audit', priority: 'low', status: 'resolved' },
-];
-
-const complianceChecks = [
-  { id: 'CC-1201', name: 'Encryption certification', status: 'pass', due: 'N/A' },
-  { id: 'CC-1202', name: 'Model audit', status: 'pending', due: '2026-06-22' },
-  { id: 'CC-1203', name: 'Data access review', status: 'pass', due: 'N/A' },
-  { id: 'CC-1204', name: 'Regulatory filing', status: 'action required', due: '2026-06-30' },
-];
-
-const reportQueue = [
-  { id: 'RP-501', title: 'Quarterly compliance overview', category: 'Regulatory', status: 'ready', updated: '2h ago' },
-  { id: 'RP-502', title: 'Agent security posture', category: 'Operations', status: 'in progress', updated: '1d ago' },
-  { id: 'RP-503', title: 'Risk exposure summary', category: 'Risk', status: 'scheduled', updated: '3d ago' },
-];
-
-const libraryItems = [
-  { id: 'LB-701', title: 'AI Usage Policy', category: 'Policy', status: 'active' },
-  { id: 'LB-702', title: 'Incident response plan', category: 'Playbook', status: 'review' },
-  { id: 'LB-703', title: 'Data access standard', category: 'Procedure', status: 'active' },
-];
-
-const auditTrails = [
-  { id: 'AT-001', event: 'Agent upgrade', user: 'Alice', product: 'CIP', time: '9m ago' },
-  { id: 'AT-002', event: 'Threat flagged', user: 'Security Bot', product: 'Otic Pulse', time: '42m ago' },
-  { id: 'AT-003', event: 'Compliance check passed', user: 'Governance Agent', product: 'All', time: '2h ago' },
-];
-
-const riskInsights = [
-  { metric: 'Exposure score', value: '14/100', trend: 'down', note: 'Reduced attack surface after patch' },
-  { metric: 'Model drift', value: '2.6%', trend: 'stable', note: 'Inside acceptable bounds' },
-  { metric: 'Policy adherence', value: '95%', trend: 'up', note: 'Governance improvements effective' },
-];
-
-const trendSeries = [
-  { label: 'Threat count', value: 12, change: '-5%', trend: 'down' },
-  { label: 'Compliance rate', value: 98, change: '+1%', trend: 'up' },
-  { label: 'Agent uptime', value: 99.7, change: '+0.3%', trend: 'up' },
-];
+// Load data from data.json
+async function loadData() {
+  try {
+    const response = await fetch('./data.json');
+    if (!response.ok) throw new Error('Failed to fetch data');
+    const data = await response.json();
+    liveFeed = data.liveFeed || defaultData.liveFeed;
+    products = data.products || defaultData.products;
+    threats = data.threats || defaultData.threats;
+    agents = data.agents || defaultData.agents;
+    incidents = data.incidents || defaultData.incidents;
+    governanceReviews = data.governanceReviews || defaultData.governanceReviews;
+    reviewRequests = data.reviewRequests || defaultData.reviewRequests;
+    escalations = data.escalations || defaultData.escalations;
+    complianceChecks = data.complianceChecks || defaultData.complianceChecks;
+    reportQueue = data.reportQueue || defaultData.reportQueue;
+    libraryItems = data.libraryItems || defaultData.libraryItems;
+    auditTrails = data.auditTrails || defaultData.auditTrails;
+    riskInsights = data.riskInsights || defaultData.riskInsights;
+    trendSeries = data.trendSeries || defaultData.trendSeries;
+  } catch (e) {
+    console.warn('Using default demo data (data.json not found or invalid)');
+  }
+}
 
 // render agents
 function renderAgents() {
@@ -526,7 +534,102 @@ function renderTrends() {
       .join('')}</div>
   `;
 }
-function renderProductPage(key) { const root = document.getElementById(`screen-${key}`); if (!root) return; root.querySelector('.panel').innerHTML = `<h2>${key.toUpperCase()}</h2><p class="panel-copy">Product-specific telemetry for ${key.toUpperCase()}.</p>`; }
+
+function renderProductPage(key) {
+  const root = document.getElementById(`screen-${key}`);
+  if (!root) return;
+  const product = products.find((p) => p.name.toLowerCase() === key.toLowerCase() || p.name.toLowerCase().includes(key.toLowerCase()));
+  if (!product) return;
+  const relatedAgents = agents.filter((agent) => agent.product.toLowerCase() === key.toLowerCase() || agent.product.toLowerCase() === 'all');
+  const relatedThreats = threats.filter((threat) => threat.product.toLowerCase() === key.toLowerCase() || threat.product.toLowerCase() === 'all');
+  root.querySelector('.panel').innerHTML = `
+    <div class="panel-header">
+      <div>
+        <p class="panel-eyebrow">Product</p>
+        <h2>${product.name} Security</h2>
+        <p class="panel-copy">Detailed security telemetry, agent status, and compliance for ${product.name}.</p>
+      </div>
+      <button class="btn btn-primary btn-sm" id="btn-refresh-product">Refresh ${product.name}</button>
+    </div>
+    <section class="metric-grid">
+      <article class="metric-card">
+        <span class="metric-label">Trust Score</span>
+        <strong>${product.trust}</strong>
+        <p class="metric-sub">Product trust rating</p>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Active Agents</span>
+        <strong>${product.agents}</strong>
+        <p class="metric-sub">Agents monitored for ${product.name}</p>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Threat Events</span>
+        <strong>${product.threats}</strong>
+        <p class="metric-sub">Recent threats in 24h</p>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Compliance</span>
+        <strong>${product.compliance}</strong>
+        <p class="metric-sub">Current compliance rating</p>
+      </article>
+    </section>
+    <section class="dashboard-grid">
+      <div class="dashboard-column">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">Agent roster</p>
+              <h3>${relatedAgents.length} agents</h3>
+            </div>
+          </div>
+          <div class="agent-list">
+            ${relatedAgents
+              .map(
+                (agent) => `
+              <div class="agent-item">
+                <div>
+                  <div class="agent-name">${agent.name}</div>
+                  <div class="agent-meta">Last seen ${agent.lastSeen}</div>
+                </div>
+                <span class="agent-status ${agent.status}">${agent.status}</span>
+              </div>
+            `,
+              )
+              .join('')}
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-column">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">Recent alerts</p>
+              <h3>${relatedThreats.length} open threats</h3>
+            </div>
+          </div>
+          <div class="review-list">
+            ${relatedThreats
+              .map(
+                (threat) => `
+              <div class="review-item">
+                <div>
+                  <div class="review-title">${threat.title}</div>
+                  <div class="review-meta">${threat.source} · ${threat.time}</div>
+                </div>
+                <div class="review-actions">
+                  <span class="threat-severity ${threat.severity}">${threat.severity.toUpperCase()}</span>
+                </div>
+              </div>
+            `,
+              )
+              .join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+  document.getElementById('btn-refresh-product')?.addEventListener('click', () => showToast(`Refreshed ${product.name} telemetry`));
+}
 
 function renderLiveFeed() {
   const list = document.getElementById('live-feed');
@@ -976,10 +1079,12 @@ function openProductModal(index) {
 }
 
 function initApp() {
-  renderLiveFeed();
-  renderProductTable();
-  renderThreats();
-  attachEventHandlers();
+  loadData().then(() => {
+    renderLiveFeed();
+    renderProductTable();
+    renderThreats();
+    attachEventHandlers();
+  });
 }
 
 if (document.readyState === 'loading') {

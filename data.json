@@ -1,0 +1,370 @@
+{
+  "liveFeed": [
+    {
+      "title": "Prompt injection blocked — CIP Credit Analyst",
+      "subtitle": "Sentinel Agent · Severity: Medium · Auto-resolved",
+      "time": "2m ago"
+    },
+    {
+      "title": "Unusual data access pattern — IIP Underwriting",
+      "subtitle": "Sentinel Agent · Under review by security team",
+      "time": "7m ago"
+    },
+    {
+      "title": "Jailbreak attempt detected — Pulse Decision Agent",
+      "subtitle": "Threat Intel Agent · Escalated to CISO",
+      "time": "14m ago"
+    },
+    {
+      "title": "Policy violation reviewed — CIP Collections",
+      "subtitle": "Governance Agent · Decision approved",
+      "time": "31m ago"
+    },
+    {
+      "title": "Key rotation completed — All Products",
+      "subtitle": "Encryption Agent · 15.2M conversations re-keyed",
+      "time": "1h ago"
+    }
+  ],
+  "products": [
+    {
+      "name": "CIP",
+      "trust": "97%",
+      "agents": 186,
+      "threats": 2,
+      "compliance": "99%",
+      "status": "Healthy"
+    },
+    {
+      "name": "IIP",
+      "trust": "95%",
+      "agents": 143,
+      "threats": 1,
+      "compliance": "98%",
+      "status": "Healthy"
+    },
+    {
+      "name": "Otic Pulse",
+      "trust": "93%",
+      "agents": 97,
+      "threats": 4,
+      "compliance": "95%",
+      "status": "Review"
+    },
+    {
+      "name": "Future Products",
+      "trust": "96%",
+      "agents": 6,
+      "threats": 0,
+      "compliance": "100%",
+      "status": "Healthy"
+    }
+  ],
+  "threats": [
+    {
+      "id": "TH-2026-001",
+      "title": "Prompt injection blocked — CIP Credit Analyst",
+      "product": "CIP",
+      "severity": "medium",
+      "source": "Sentinel Agent",
+      "time": "2m ago"
+    },
+    {
+      "id": "TH-2026-002",
+      "title": "Unusual data access pattern — IIP Underwriting",
+      "product": "IIP",
+      "severity": "medium",
+      "source": "Sentinel Agent",
+      "time": "7m ago"
+    },
+    {
+      "id": "TH-2026-003",
+      "title": "Jailbreak attempt detected — Pulse Decision Agent",
+      "product": "Otic Pulse",
+      "severity": "high",
+      "source": "Threat Intel Agent",
+      "time": "14m ago"
+    },
+    {
+      "id": "TH-2026-004",
+      "title": "Policy violation reviewed — CIP Collections",
+      "product": "CIP",
+      "severity": "low",
+      "source": "Governance Agent",
+      "time": "31m ago"
+    },
+    {
+      "id": "TH-2026-005",
+      "title": "Key rotation completed — All Products",
+      "product": "All",
+      "severity": "low",
+      "source": "Encryption Agent",
+      "time": "1h ago"
+    }
+  ],
+  "agents": [
+    {
+      "id": "AG-1001",
+      "name": "Sentinel Agent",
+      "product": "CIP",
+      "status": "healthy",
+      "lastSeen": "12s ago"
+    },
+    {
+      "id": "AG-1002",
+      "name": "Threat Intel Agent",
+      "product": "Otic Pulse",
+      "status": "warning",
+      "lastSeen": "2m ago"
+    },
+    {
+      "id": "AG-1003",
+      "name": "Encryption Agent",
+      "product": "All",
+      "status": "healthy",
+      "lastSeen": "7m ago"
+    },
+    {
+      "id": "AG-1004",
+      "name": "Governance Agent",
+      "product": "CIP",
+      "status": "review",
+      "lastSeen": "31m ago"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "INC-1024",
+      "title": "Privilege Escalation Attempt",
+      "severity": "critical",
+      "product": "CIP",
+      "time": "4h ago",
+      "status": "open"
+    },
+    {
+      "id": "INC-1025",
+      "title": "Suspicious API Activity",
+      "severity": "high",
+      "product": "IIP",
+      "time": "2h ago",
+      "status": "investigating"
+    },
+    {
+      "id": "INC-1026",
+      "title": "Unauthorized Access Request",
+      "severity": "medium",
+      "product": "Otic Pulse",
+      "time": "1d ago",
+      "status": "closed"
+    },
+    {
+      "id": "INC-1027",
+      "title": "Data Classification Alert",
+      "severity": "low",
+      "product": "CIP",
+      "time": "3d ago",
+      "status": "review"
+    }
+  ],
+  "governanceReviews": [
+    {
+      "id": "GR-2001",
+      "decision": "Approve data sharing",
+      "status": "approved",
+      "reviewer": "Alice",
+      "date": "2026-06-14"
+    },
+    {
+      "id": "GR-2002",
+      "decision": "Model retrain",
+      "status": "pending",
+      "reviewer": "Bob",
+      "date": "2026-06-15"
+    },
+    {
+      "id": "GR-2003",
+      "decision": "AI safety policy update",
+      "status": "review",
+      "reviewer": "Clara",
+      "date": "2026-06-12"
+    }
+  ],
+  "reviewRequests": [
+    {
+      "id": "DR-3001",
+      "title": "Update classification policy",
+      "owner": "Sam",
+      "due": "Today",
+      "status": "pending"
+    },
+    {
+      "id": "DR-3002",
+      "title": "Approve agent deployment",
+      "owner": "Mia",
+      "due": "Tomorrow",
+      "status": "review"
+    },
+    {
+      "id": "DR-3003",
+      "title": "Review data retention controls",
+      "owner": "Noah",
+      "due": "2d",
+      "status": "approved"
+    }
+  ],
+  "escalations": [
+    {
+      "id": "ES-4101",
+      "incident": "API privilege spike",
+      "owner": "Security Ops",
+      "priority": "high",
+      "status": "open"
+    },
+    {
+      "id": "ES-4102",
+      "incident": "Disallowed data request",
+      "owner": "Compliance",
+      "priority": "medium",
+      "status": "pending"
+    },
+    {
+      "id": "ES-4103",
+      "incident": "Policy violation",
+      "owner": "Audit",
+      "priority": "low",
+      "status": "resolved"
+    }
+  ],
+  "complianceChecks": [
+    {
+      "id": "CC-1201",
+      "name": "Encryption certification",
+      "status": "pass",
+      "due": "N/A"
+    },
+    {
+      "id": "CC-1202",
+      "name": "Model audit",
+      "status": "pending",
+      "due": "2026-06-22"
+    },
+    {
+      "id": "CC-1203",
+      "name": "Data access review",
+      "status": "pass",
+      "due": "N/A"
+    },
+    {
+      "id": "CC-1204",
+      "name": "Regulatory filing",
+      "status": "action required",
+      "due": "2026-06-30"
+    }
+  ],
+  "reportQueue": [
+    {
+      "id": "RP-501",
+      "title": "Quarterly compliance overview",
+      "category": "Regulatory",
+      "status": "ready",
+      "updated": "2h ago"
+    },
+    {
+      "id": "RP-502",
+      "title": "Agent security posture",
+      "category": "Operations",
+      "status": "in progress",
+      "updated": "1d ago"
+    },
+    {
+      "id": "RP-503",
+      "title": "Risk exposure summary",
+      "category": "Risk",
+      "status": "scheduled",
+      "updated": "3d ago"
+    }
+  ],
+  "libraryItems": [
+    {
+      "id": "LB-701",
+      "title": "AI Usage Policy",
+      "category": "Policy",
+      "status": "active"
+    },
+    {
+      "id": "LB-702",
+      "title": "Incident response plan",
+      "category": "Playbook",
+      "status": "review"
+    },
+    {
+      "id": "LB-703",
+      "title": "Data access standard",
+      "category": "Procedure",
+      "status": "active"
+    }
+  ],
+  "auditTrails": [
+    {
+      "id": "AT-001",
+      "event": "Agent upgrade",
+      "user": "Alice",
+      "product": "CIP",
+      "time": "9m ago"
+    },
+    {
+      "id": "AT-002",
+      "event": "Threat flagged",
+      "user": "Security Bot",
+      "product": "Otic Pulse",
+      "time": "42m ago"
+    },
+    {
+      "id": "AT-003",
+      "event": "Compliance check passed",
+      "user": "Governance Agent",
+      "product": "All",
+      "time": "2h ago"
+    }
+  ],
+  "riskInsights": [
+    {
+      "metric": "Exposure score",
+      "value": "14/100",
+      "trend": "down",
+      "note": "Reduced attack surface after patch"
+    },
+    {
+      "metric": "Model drift",
+      "value": "2.6%",
+      "trend": "stable",
+      "note": "Inside acceptable bounds"
+    },
+    {
+      "metric": "Policy adherence",
+      "value": "95%",
+      "trend": "up",
+      "note": "Governance improvements effective"
+    }
+  ],
+  "trendSeries": [
+    {
+      "label": "Threat count",
+      "value": 12,
+      "change": "-5%",
+      "trend": "down"
+    },
+    {
+      "label": "Compliance rate",
+      "value": 98,
+      "change": "+1%",
+      "trend": "up"
+    },
+    {
+      "label": "Agent uptime",
+      "value": 99.7,
+      "change": "+0.3%",
+      "trend": "up"
+    }
+  ]
+}
