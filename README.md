@@ -11,3 +11,4 @@ A static dashboard prototype for monitoring background AI usage and policy compl
 ## Launch
 
 Open `index.html` in a browser to preview the UI.
+<!-- GitHub Pages rebuild trigger -->
