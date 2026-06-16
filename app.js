@@ -958,9 +958,19 @@ function handleActionClick(event) {
   }
 }
 
+function handleIntegrationConnect(event) {
+  const button = event.target.closest('[data-integration]');
+  if (!button) return;
+  const integration = button.dataset.integration;
+  const name = integration === 'microsoft' ? 'Microsoft Teams' : 'WhatsApp Business';
+  showToast(`Initiating connection to ${name}...`);
+  setTimeout(() => showToast(`✓ Connected to ${name}!`), 1000);
+}
+
 function attachEventHandlers() {
   document.querySelectorAll('.nav-button').forEach((button) => button.addEventListener('click', handleNavClick));
   document.querySelectorAll('[data-action]').forEach((button) => button.addEventListener('click', handleActionClick));
+  document.querySelectorAll('[data-integration]').forEach((button) => button.addEventListener('click', handleIntegrationConnect));
   // delegate clicks on product rows
   const tableBody = document.getElementById('product-table-body');
   if (tableBody) {

@@ -1075,6 +1075,75 @@ button {
   line-height: 1;
   cursor: pointer;
 }
+
+.integrations-panel {
+  margin-top: 24px;
+}
+
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.integration-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 20px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.integration-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+}
+
+.integration-icon {
+  font-size: 2.2rem;
+  text-align: center;
+  min-width: 60px;
+}
+
+.integration-info h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.integration-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.integration-card .btn {
+  min-width: 110px;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .integrations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .integration-card {
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+  }
+
+  .integration-card .btn {
+    grid-column: 2;
+    min-width: auto;
+    width: 100%;
+  }
+}
+
 .modal-table {
   width: 100%;
   border-collapse: collapse;
