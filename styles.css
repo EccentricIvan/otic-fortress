@@ -498,25 +498,21 @@ button {
 }
 
 .panel-actions {
-  display: flex;
-  gap: 12px;
-}
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: flex-start;
-  margin-bottom: 22px;
-}
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 22px;
+  }
 
-.panel-eyebrow {
-  margin: 0;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
+  .panel-eyebrow {
+    margin: 0;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
 .panel h2 {
   margin: 8px 0 0;
   font-size: 1.25rem;
@@ -840,20 +836,77 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .metric-grid,
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(320px, 85vw);
+    height: 100vh;
+    padding: 28px 18px;
+    transform: translateX(-110%);
+    transition: transform 0.3s ease;
+    z-index: 1100;
+    box-shadow: 22px 0 80px rgba(15, 23, 42, 0.18);
+    border-right: none;
+    background: var(--surface);
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .sidebar.sidebar-open + .sidebar-backdrop,
+  .sidebar.sidebar-open ~ .sidebar-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  .main-panel {
+    padding: 22px 20px 30px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
 
+  .product-table {
+    min-width: 100%;
+  }
+
   .chart-ring {
     width: 100%;
-    max-width: 320px;
+    max-width: 100%;
+  }
+
+  .chart-summary {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 720px) {
   .sidebar {
-    padding: 24px 18px;
+    padding: 20px 16px;
   }
 
   .main-panel {
@@ -902,6 +955,51 @@ button {
 
   .product-table {
     min-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .mobile-title {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-button {
+    padding: 12px 12px;
+    font-size: 0.92rem;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .threat-body {
+    gap: 14px;
+  }
+
+  .threat-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chat-launcher {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .chat-widget {
+    right: 16px;
+    left: 16px;
+    bottom: 70px;
   }
 }
 
