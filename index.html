@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="brand">
         <div class="brand-mark">OG</div>
         <div class="brand-text">
@@ -56,8 +56,20 @@
         <button type="button" class="nav-button" data-page="iip">IIP</button>
       </div>
     </aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
     <main class="main-panel" id="main-panel">
+      <div class="mobile-header">
+        <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Open navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="mobile-title">
+          <strong>Otic Guardian</strong>
+          <span>Command Center</span>
+        </div>
+      </div>
       <div class="screen" data-page="command" id="screen-command">
       <header class="page-header">
         <div class="page-title-block">

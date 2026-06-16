@@ -741,6 +741,32 @@ function toggleChatWidget() {
   widget.setAttribute('aria-hidden', String(!isOpen));
 }
 
+function openMobileMenu() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (!sidebar || !backdrop) return;
+  sidebar.classList.add('sidebar-open');
+  backdrop.style.display = 'block';
+}
+
+function closeMobileMenu() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (!sidebar || !backdrop) return;
+  sidebar.classList.remove('sidebar-open');
+  backdrop.style.display = 'none';
+}
+
+function toggleMobileMenu() {
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('sidebar-open')) {
+    closeMobileMenu();
+  } else {
+    openMobileMenu();
+  }
+}
+
 function handleChatSend() {
   const input = document.getElementById('chat-input');
   if (!input) return;
@@ -760,6 +786,7 @@ function handleNavClick(event) {
   const page = button.dataset.page;
   showScreen(page);
   showToast(`Navigated to ${button.textContent.trim()}`);
+  closeMobileMenu();
 }
 
 function showScreen(page) {
@@ -865,6 +892,17 @@ function attachEventHandlers() {
   if (chatInput) chatInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') handleChatSend();
   });
+
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+  if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+  if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeMobileMenu);
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      closeMobileMenu();
+    }
+  });
+
   const severitySelect = document.getElementById('filter-severity');
   const rangeSelect = document.getElementById('filter-range');
   const searchInput = document.getElementById('filter-search');
